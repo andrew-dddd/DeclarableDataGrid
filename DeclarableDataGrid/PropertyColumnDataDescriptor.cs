@@ -1,17 +1,15 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Reflection;
 
 namespace DeclarableDataGrid
 {
-    public class DeclarableColumnDataPropertyDescriptor : PropertyDescriptor
+    public class PropertyColumnDataDescriptor : DeclarableDataGridPropertyDescriptor
     {
         private readonly PropertyInfo _propertyInfo;
 
-        public DeclarableColumnDataPropertyDescriptor(PropertyInfo propertyInfo, int displayIndex, Attribute[] attributes) : base(propertyInfo.Name, attributes)
+        public PropertyColumnDataDescriptor(PropertyInfo propertyInfo, int displayIndex, Attribute[] attributes) : base(displayIndex, propertyInfo.Name, attributes)
         {
-            _propertyInfo = propertyInfo;
-            DisplayIndex = displayIndex;
+            _propertyInfo = propertyInfo;            
         }
 
         public override Type ComponentType => _propertyInfo.DeclaringType;
@@ -19,8 +17,6 @@ namespace DeclarableDataGrid
         public override bool IsReadOnly => true;
 
         public override Type PropertyType => _propertyInfo.PropertyType;
-
-        public int DisplayIndex { get; private set; }
 
         public override bool CanResetValue(object component) => false;
 
@@ -47,12 +43,5 @@ namespace DeclarableDataGrid
         }
 
         public override bool ShouldSerializeValue(object component) => false;
-
-        public string GetDisplayName()
-        {
-            return string.IsNullOrEmpty(DisplayName)
-                    ? Name
-                    : DisplayName;
-        }
     }
 }

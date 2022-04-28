@@ -13,18 +13,13 @@ namespace DeclarableDataGrid
         private PropertyDescriptorCollection _propertyDescriptorCollection = new PropertyDescriptorCollection(new PropertyDescriptor[0]);
         private HashSet<string> _columnHeaderNames = new HashSet<string>();
 
-        public void UsePropertyAsColumn<TProperty>(Expression<Func<T, TProperty>> expression, Action<ColumnHeaderBuilder> builder = null)
+        public void UsePropertyAsColumn<TProperty>(Expression<Func<T, TProperty>> expression, Action<PropertyColumnBuilder> builder = null)
         {
             if (expression.Body is MemberExpression memberExpression)
             {
                 var propertyInfo = (PropertyInfo)memberExpression.Member;
 
-                if (_columnHeaderNames.Contains(propertyInfo.Name))
-                {
-                    throw new InvalidOperationException($"Column {propertyInfo.Name} has already been registered.");
-                }
-
-                var columnHeaderBuilder = new ColumnHeaderBuilder(propertyInfo)
+                var columnHeaderBuilder = new PropertyColumnBuilder(propertyInfo)
                     .WithDisplayIndex(_propertyDescriptorCollection.Count);
 
                 builder?.Invoke(columnHeaderBuilder);
@@ -32,7 +27,17 @@ namespace DeclarableDataGrid
                 return;
             }
 
-            throw new InvalidOperationException("Expected property but got: ");
+            throw new InvalidOperationException("Expected property");
+        }
+
+        public void UseDynamicColumn(string columnName, Type columnType, Action<DynamicColumnBuilder> builder = null)
+        {
+            var columnHeaderBuilder = new DynamicColumnBuilder(typeof(T), columnType, columnName)
+                .WithDisplayIndex(_propertyDescriptorCollection.Count);
+
+            builder?.Invoke(columnHeaderBuilder);
+            var dynamicProperty = columnHeaderBuilder.BuildColumnDescriptor();
+            AddColumnDescriptor(dynamicProperty);
         }
 
         public string GetListName(PropertyDescriptor[] listAccessors) => string.Empty;
@@ -57,8 +62,13 @@ namespace DeclarableDataGrid
             base.InsertItem(index, item);
         }
 
-        private void AddColumnDescriptor(DeclarableColumnDataPropertyDescriptor columnDescriptor)
+        private void AddColumnDescriptor(DeclarableDataGridPropertyDescriptor columnDescriptor)
         {
+            if (_columnHeaderNames.Contains(columnDescriptor.Name))
+            {
+                throw new InvalidOperationException($"Column {columnDescriptor.Name} has already been registered.");
+            }
+
             _columnHeaderNames.Add(columnDescriptor.Name);
             _propertyDescriptorCollection.Add(columnDescriptor);
         }

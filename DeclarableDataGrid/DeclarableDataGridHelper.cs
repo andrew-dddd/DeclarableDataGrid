@@ -52,7 +52,7 @@ namespace DeclarableDataGrid
 
             columnConfigurationAction?.Invoke(dgdtc);
 
-            if (e.PropertyDescriptor is DeclarableColumnDataPropertyDescriptor descriptor)
+            if (e.PropertyDescriptor is DeclarableDataGridPropertyDescriptor descriptor)
             {
                 dgdtc.ColumnName = descriptor.Name;
                 dgdtc.Header = descriptor.GetDisplayName();

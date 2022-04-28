@@ -21,13 +21,18 @@ namespace DeclarableDataGrid.Example
             ExampleCollection.UsePropertyAsColumn(x => x.LastName, x => x.WithDisplayName("Last Name"));
             ExampleCollection.UsePropertyAsColumn(x => x.BirthDate, x => x.WithDisplayName("Birth Date"));
 
+            ExampleCollection.UseDynamicColumn("DynamicColumn1", typeof(int), x => x.WithDisplayName("Dynamic column 1"));
+            ExampleCollection.UseDynamicColumn("DynamicColumn2", typeof(double), x => x.WithDisplayName("Dynamic column 2"));
+            ExampleCollection.UseDynamicColumn("DynamicColumn3", typeof(string), x => x.WithDisplayName("Dynamic column 3"));
+
             ExampleCollection.Add(new PersonDataGridItem
             {
                 PersonId = 1,
                 BirthDate = new DateTime(1990, 1, 1),
                 Name = "John",
                 LastName = "Smith",
-                HiddenColumn = "SSN"
+                HiddenColumn = "SSN",
+                ["DynamicColumn1"] = 1,
             });
 
             ExampleCollection.Add(new PersonDataGridItem
@@ -36,7 +41,8 @@ namespace DeclarableDataGrid.Example
                 BirthDate = new DateTime(1989, 1, 1),
                 Name = "Jane",
                 LastName = "Smith",
-                HiddenColumn = "SSN"
+                HiddenColumn = "SSN",
+                ["DynamicColumn2"] = 25.0
             });
 
             ExampleCollection.Add(new PersonDataGridItem
@@ -45,7 +51,8 @@ namespace DeclarableDataGrid.Example
                 BirthDate = new DateTime(1988, 1, 1),
                 Name = "Joe",
                 LastName = "Smith",
-                HiddenColumn = "SSN"
+                HiddenColumn = "SSN",
+                ["DynamicColumn3"] = "value"
             });
         }
 

@@ -17,7 +17,10 @@ namespace DeclarableDataGrid
             // That selector is not really mandatory, ordinary DataTemplateSelecor can be used but logic in the helper would need to be updated/declared.
             if (container is ContentPresenter p && p.Parent is DataGridCell cell && cell.Column is DeclarableDataGridColumn dgtc)
             {
-                return SelectTemplate(item, dgtc.ColumnDataType);
+                var template = SelectTemplate(item, dgtc.ColumnDataType);
+                return template == null
+                    ? base.SelectTemplate(item, container)
+                    : template;
             }
 
             return base.SelectTemplate(item, container);
