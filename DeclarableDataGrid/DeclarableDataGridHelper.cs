@@ -31,7 +31,7 @@ namespace DeclarableDataGrid
             });
         }
 
-        private static void ColumnGeneratingAction(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null) 
+        private static void ColumnGeneratingAction(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
         {
             // By default, DataGrid creates text column for complex types to display ToString() value of the object.
             // Fot other simple types, there are other templates, like checkbox for the bool
@@ -46,7 +46,7 @@ namespace DeclarableDataGrid
             }
 
             // Storing type of the column for the later use in the cell template selector.
-            dgdtc.ColumnDataType = e.PropertyType;            
+            dgdtc.ColumnDataType = e.PropertyType;
             dgdtc.IsReadOnly = true;
             dgdtc.Header = e.Column.Header;
 

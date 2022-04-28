@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace DeclarableDataGrid.Tests
-{   
+{
     public class DeclarableDataGridTests
     {
         [Fact]

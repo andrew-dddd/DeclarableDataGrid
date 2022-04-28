@@ -9,7 +9,7 @@ namespace DeclarableDataGrid
 
         public PropertyColumnDataDescriptor(PropertyInfo propertyInfo, int displayIndex, Attribute[] attributes) : base(displayIndex, propertyInfo.Name, attributes)
         {
-            _propertyInfo = propertyInfo;            
+            _propertyInfo = propertyInfo;
         }
 
         public override Type ComponentType => _propertyInfo.DeclaringType;

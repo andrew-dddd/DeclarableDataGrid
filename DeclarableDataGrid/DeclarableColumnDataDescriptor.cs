@@ -71,7 +71,7 @@ namespace DeclarableDataGrid
         public object this[string name]
         {
             get { return GetDynamicPropertyValue(name); }
-            set 
+            set
             {
                 SetDynamicPropertyValue(name, value);
             }
