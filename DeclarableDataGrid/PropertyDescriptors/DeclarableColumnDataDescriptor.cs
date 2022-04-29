@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace DeclarableDataGrid
+namespace DeclarableDataGrid.PropertyDescriptors
 {
     /// <summary>
-    /// Describes columns of the row of the DataGrid
+    /// Data grid column descriptor
     /// </summary>
     public abstract class DeclarableColumnDataDescriptor : ICustomTypeDescriptor
     {

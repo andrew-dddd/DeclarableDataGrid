@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DeclarableDataGrid.ColumnBuilders;
+using DeclarableDataGrid.PropertyDescriptors;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeclarableDataGrid.PropertyDescriptors;
+using System;
 
 namespace DeclarableDataGrid.Example
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace DeclarableDataGrid
+namespace DeclarableDataGrid.PropertyDescriptors
 {
     public abstract class DeclarableDataGridPropertyDescriptor : PropertyDescriptor
     {

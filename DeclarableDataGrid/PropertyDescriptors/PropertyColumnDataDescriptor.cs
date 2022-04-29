@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 
-namespace DeclarableDataGrid
+namespace DeclarableDataGrid.PropertyDescriptors
 {
-    public class PropertyColumnDataDescriptor : DeclarableDataGridPropertyDescriptor
+    public sealed class PropertyColumnDataDescriptor : DeclarableDataGridPropertyDescriptor
     {
         private readonly PropertyInfo _propertyInfo;
 

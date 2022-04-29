@@ -35,7 +35,7 @@ namespace DeclarableDataGrid.Example
 
         private void ExampleDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            DeclarableDataGridHelper.DefaultColumnGeneratingAction(TemplateSelector, e);
+            DeclarableColumnGenerationHelper.OnDeclarableColumnGenerated(e);
         }
     }
 }

@@ -46,13 +46,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DynamicColumnPropertyDescriptor.cs" />
-    <Compile Include="PropertyColumnDataDescriptor.cs" />
-    <Compile Include="PropertyColumnBuilder.cs" />
-    <Compile Include="DeclarableColumnDataDescriptor.cs" />
-    <Compile Include="DeclarableDataGridPropertyDescriptor.cs" />
+    <Compile Include="ColumnBuilders\DynamicColumnBuilder.cs" />
+    <Compile Include="PropertyDescriptors\DynamicColumnPropertyDescriptor.cs" />
+    <Compile Include="PropertyDescriptors\PropertyColumnDataDescriptor.cs" />
+    <Compile Include="ColumnBuilders\PropertyColumnBuilder.cs" />
+    <Compile Include="PropertyDescriptors\DeclarableColumnDataDescriptor.cs" />
+    <Compile Include="PropertyDescriptors\DeclarableDataGridPropertyDescriptor.cs" />
     <Compile Include="DeclarableDataGridColumn.cs" />
-    <Compile Include="DeclarableDataGridHelper.cs" />
+    <Compile Include="DeclarableColumnGenerationHelper.cs" />
     <Compile Include="DeclarableDataGridObservableCollection.cs" />
     <Compile Include="DeclarableDataGridTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

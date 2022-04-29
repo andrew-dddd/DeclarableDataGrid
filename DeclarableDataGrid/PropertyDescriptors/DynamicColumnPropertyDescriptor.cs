@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DeclarableDataGrid
+namespace DeclarableDataGrid.PropertyDescriptors
 {
-    public class DynamicColumnPropertyDescriptor : DeclarableDataGridPropertyDescriptor
+    public sealed class DynamicColumnPropertyDescriptor : DeclarableDataGridPropertyDescriptor
     {
         private readonly Type _componentType;
         private readonly Type _columnType;
