@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace DeclarableDataGrid.PropertyDescriptors
 {
@@ -42,7 +43,16 @@ namespace DeclarableDataGrid.PropertyDescriptors
         /// <param name="propertyDescriptorCollection"></param>
         public void SetProperties(PropertyDescriptorCollection propertyDescriptorCollection)
         {
+            // When property has been set before setting property descriptors, types of the set values must be checked.
+
             _propertyDescriptorCollection = propertyDescriptorCollection;
+            foreach (var propertyDescriptor in _propertyDescriptorCollection.OfType<DynamicColumnPropertyDescriptor>())
+            {
+                if (_dynamicPropertiesValues.TryGetValue(propertyDescriptor.Name, out var value) && propertyDescriptor.PropertyType.IsAssignableFrom(value.GetType())) continue;
+
+                // If the type of set value does not match the configured type, or the type of value does not inherit from the configured type, throw exception.                
+                throw new InvalidOperationException($"Expected property {propertyDescriptor.Name} to be of type {propertyDescriptor.PropertyType} but instead property is of type {value.GetType()}");
+            }
         }
 
         public PropertyDescriptorCollection GetProperties(Attribute[] attributes) => _propertyDescriptorCollection;

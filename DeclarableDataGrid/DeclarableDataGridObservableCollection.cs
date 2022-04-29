@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace DeclarableDataGrid
 {
@@ -17,19 +16,11 @@ namespace DeclarableDataGrid
 
         public void UsePropertyAsColumn<TProperty>(Expression<Func<T, TProperty>> expression, Action<PropertyColumnBuilder> builder = null)
         {
-            if (expression.Body is MemberExpression memberExpression)
-            {
-                var propertyInfo = (PropertyInfo)memberExpression.Member;
+            var columnHeaderBuilder = PropertyColumnBuilder.CreateFromExpression(expression)
+                .WithDisplayIndex(_propertyDescriptorCollection.Count);
 
-                var columnHeaderBuilder = new PropertyColumnBuilder(propertyInfo)
-                    .WithDisplayIndex(_propertyDescriptorCollection.Count);
-
-                builder?.Invoke(columnHeaderBuilder);
-                AddColumnDescriptor(columnHeaderBuilder.BuildColumnDescriptor());
-                return;
-            }
-
-            throw new InvalidOperationException("Expected property");
+            builder?.Invoke(columnHeaderBuilder);
+            AddColumnDescriptor(columnHeaderBuilder.BuildColumnDescriptor());
         }
 
         public void UseDynamicColumn(string columnName, Type columnType, Action<DynamicColumnBuilder> builder = null)
@@ -38,8 +29,7 @@ namespace DeclarableDataGrid
                 .WithDisplayIndex(_propertyDescriptorCollection.Count);
 
             builder?.Invoke(columnHeaderBuilder);
-            var dynamicProperty = columnHeaderBuilder.BuildColumnDescriptor();
-            AddColumnDescriptor(dynamicProperty);
+            AddColumnDescriptor(columnHeaderBuilder.BuildColumnDescriptor());
         }
 
         public string GetListName(PropertyDescriptor[] listAccessors) => string.Empty;

@@ -11,12 +11,5 @@ namespace DeclarableDataGrid.PropertyDescriptors
         }
 
         public int DisplayIndex { get; private set; }
-
-        public string GetDisplayName()
-        {
-            return string.IsNullOrEmpty(DisplayName)
-                    ? Name
-                    : DisplayName;
-        }
     }
 }

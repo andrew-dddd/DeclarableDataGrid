@@ -57,7 +57,7 @@ namespace DeclarableDataGrid
             if (e.PropertyDescriptor is DeclarableDataGridPropertyDescriptor descriptor)
             {
                 dgdtc.ColumnName = descriptor.Name;
-                dgdtc.Header = descriptor.GetDisplayName();
+                dgdtc.Header = descriptor.DisplayName;
                 dgdtc.DisplayIndex = descriptor.DisplayIndex;
                 dgdtc.IsReadOnly = descriptor.IsReadOnly;
             }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace DeclarableDataGrid.ColumnBuilders
@@ -43,6 +44,20 @@ namespace DeclarableDataGrid.ColumnBuilders
             var attributesArray = attributes.Where(x => x != null).ToArray();
 
             return new PropertyColumnDataDescriptor(_propertyInfo, DisplayIndex, attributesArray);
+        }
+
+        internal static PropertyColumnBuilder CreateFromExpression<TType, TProperty>(Expression<Func<TType, TProperty>> expression)
+            where TType : DeclarableColumnDataDescriptor
+        {
+            if (expression.Body is MemberExpression memberExpression)
+            {
+                var propertyInfo = (PropertyInfo)memberExpression.Member;
+
+                var columnHeaderBuilder = new PropertyColumnBuilder(propertyInfo);
+                return columnHeaderBuilder;
+            }
+
+            throw new InvalidOperationException("Expected property");
         }
     }
 }
