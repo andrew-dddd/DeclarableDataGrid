@@ -23,9 +23,9 @@ namespace DeclarableDataGrid
             AddColumnDescriptor(columnHeaderBuilder.BuildColumnDescriptor());
         }
 
-        public void UseDynamicColumn(string columnName, Type columnType, Action<DynamicColumnBuilder> builder = null)
+        public void UseDynamicColumn<TColumn>(string columnName, Action<DynamicColumnBuilder> builder = null)
         {
-            var columnHeaderBuilder = new DynamicColumnBuilder(typeof(T), columnType, columnName)
+            var columnHeaderBuilder = new DynamicColumnBuilder(typeof(T), typeof(TColumn), columnName)
                 .WithDisplayIndex(_propertyDescriptorCollection.Count);
 
             builder?.Invoke(columnHeaderBuilder);
