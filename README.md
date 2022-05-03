@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/andrew-dddd/DeclarableDataGrid.svg?branch=main)](https://app.travis-ci.com/andrew-dddd/DeclarableDataGrid)
+
 # DeclarableDataGrid
 
 DeclarableDataGrid will help you contol Windows Presentation Foundation DataGrid columns. It allows you to declare columns statically, or add them while running WPF application. 
