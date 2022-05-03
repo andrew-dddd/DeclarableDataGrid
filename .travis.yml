@@ -1,2 +1,8 @@
 language: csharp
 solution: DeclarableDataGrid.sln
+mono: none
+dotnet: 5.0.100
+os: windows
+script:
+  - dotnet restore
+  - dotnet test
