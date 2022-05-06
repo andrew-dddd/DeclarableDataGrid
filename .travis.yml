@@ -4,9 +4,8 @@ mono: none
 os: windows
 install:
   - choco install nuget.commandline   
-  - choco install microsoft-build-tools
 script:
   - nuget.exe restore
   - nuget.exe install xunit.runner.console -Version 2.4.1 -OutputDirectory testrunner
-  - msbuild /p:Configuration=Release DeclarableDataGrid.sln  
+  - C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\bin\msbuild.exe /p:Configuration=Release DeclarableDataGrid.sln  
   - .\testrunner\xunit.runner.console.2.4.1\tools\net472\xunit.console.exe .\DeclarableDataGrid.Tests\bin\Release\DeclarableDataGrid.Tests.dll  
