@@ -3,7 +3,6 @@ solution: DeclarableDataGrid.sln
 mono: none
 os: windows
 install:
-  - choco install dotnetfx --version=4.7.2.20180712
   - choco install nuget.commandline  
 script:
   - msbuild /p:Configuration=Release DeclarableDataGrid.sln
