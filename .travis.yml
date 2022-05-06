@@ -1,7 +1,6 @@
 language: csharp
 solution: DeclarableDataGrid.sln
 mono: none
-os: windows
 install:
   - choco install nuget.commandline
 script:
