@@ -1,9 +1,0 @@
-language: csharp
-solution: DeclarableDataGrid.sln
-mono: 
-  - latest 
-script:
-  - nuget restore
-  - nuget install xunit.runner.console -Version 2.4.1 -OutputDirectory testrunner
-  - msbuild /p:Configuration=Release DeclarableDataGrid.sln
-  - testrunner\xunit.runner.console.2.4.1\tools\net472\xunit.console.exe .\DeclarableDataGrid.Tests\bin\Release\DeclarableDataGrid.Tests.dll
