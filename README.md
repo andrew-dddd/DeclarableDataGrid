@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/andrew-dddd/DeclarableDataGrid.svg?branch=main)](https://app.travis-ci.com/andrew-dddd/DeclarableDataGrid)
+[![Build status](https://ci.appveyor.com/api/projects/status/qjelyyf8s3ue2wjm?svg=true)](https://ci.appveyor.com/project/andrew-dddd/declarabledatagrid)
 
 # DeclarableDataGrid
 
