@@ -27,6 +27,7 @@ namespace DeclarableDataGrid
 
             // Storing type of the column for the later use in the cell template selector.
             dgdtc.ColumnDataType = e.PropertyType;
+            dgdtc.CellTemplateSelector = new DataTemplateSelector();
 
             if (e.PropertyDescriptor is DeclarableDataGridPropertyDescriptor descriptor)
             {
