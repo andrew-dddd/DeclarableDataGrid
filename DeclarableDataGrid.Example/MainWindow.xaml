@@ -16,6 +16,23 @@
                     </Style>
                 </ddg:ColumnTemplateContainer.CellStyle>
             </ddg:ColumnTemplateContainer>
+
+            <ddg:ColumnTemplateContainer x:Key="PersonDataColumnTemplate">
+                <ddg:ColumnTemplateContainer.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="Red"></Setter>
+                    </Style>
+                </ddg:ColumnTemplateContainer.CellStyle>
+                <ddg:ColumnTemplateContainer.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding ExampleData1}"></Run>
+                            <Run Text=":"></Run>
+                            <Run Text="{Binding ExampleData2}"></Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ddg:ColumnTemplateContainer.CellTemplate>
+            </ddg:ColumnTemplateContainer>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>

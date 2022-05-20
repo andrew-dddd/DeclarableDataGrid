@@ -28,18 +28,13 @@ namespace DeclarableDataGrid.Example
 
             _declarableDataGridBuilder = new DeclarableDataGridBuilder();
             _declarableDataGridBuilder.ConfigureColumnTemplates(Resources)
-                .ForColumnUseTemplate("DynamicColumn1", "ColumnTemplate");
+                .ForColumnUseTemplate("DynamicColumn1", "ColumnTemplate")
+                .ForColumnUseTemplate("PersonData", "PersonDataColumnTemplate");
         }
 
         private void ExampleDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            _declarableDataGridBuilder.CreateDeclarableDataGrid(e, column =>
-            {
-                if (column.ColumnName == "DynamicColumn1")
-                {
-                    column.UseTemplateContainer(this.Resources["ColumnTemplate"] as ColumnTemplateContainer);
-                }
-            });
+            _declarableDataGridBuilder.CreateDeclarableDataGrid(e);
         }
     }
 }

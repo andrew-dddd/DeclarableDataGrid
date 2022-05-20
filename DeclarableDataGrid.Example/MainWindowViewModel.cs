@@ -17,9 +17,11 @@ namespace DeclarableDataGrid.Example
             ExampleCollection = new DeclarableDataGridObservableCollection<PersonDataGridItem>();
 
             ExampleCollection.UsePropertyAsColumn(x => x.PersonId, x => x.WithDisplayName("Id"));
+            //ExampleCollection.UsePropertyAsColumn(x => x.PersonData, x => x.WithDisplayName("Person data"));
             ExampleCollection.UsePropertyAsColumn(x => x.Name, x => x.WithDisplayName("Name"));
             ExampleCollection.UsePropertyAsColumn(x => x.LastName, x => x.WithDisplayName("Last Name"));
             ExampleCollection.UsePropertyAsColumn(x => x.BirthDate, x => x.WithDisplayName("Birth Date"));
+            
 
             ExampleCollection.UseDynamicColumn<int>("DynamicColumn1", x => x.WithDisplayName("Dynamic column 1"));
             ExampleCollection.UseDynamicColumn<double>("DynamicColumn2", x => x.WithDisplayName("Dynamic column 2"));
@@ -33,6 +35,11 @@ namespace DeclarableDataGrid.Example
                 LastName = "Smith",
                 HiddenColumn = "SSN",
                 ["DynamicColumn1"] = 1,
+                PersonData = new PersonData
+                {
+                    ExampleData1 = "Ex1",
+                    ExampleData2 = "Ex2"
+                }
             });
 
             ExampleCollection.Add(new PersonDataGridItem
