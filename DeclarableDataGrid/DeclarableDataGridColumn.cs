@@ -13,17 +13,17 @@ namespace DeclarableDataGrid
         /// <summary>
         /// Property binding for the DataGrid column
         /// </summary>
-        public BindingBase ColumnDataBinding { get; set; }
+        public BindingBase ColumnDataBinding { get;  internal set; }
 
         /// <summary>
         /// Type of the property bound to the column
         /// </summary>
-        public Type ColumnDataType { get; set; }
+        public Type ColumnDataType { get; internal set; }
 
         /// <summary>
         /// Name of the column given at declaration time.
         /// </summary>
-        public string ColumnName { get; set; }
+        public string ColumnName { get; internal set; }
 
         protected override FrameworkElement GenerateElement(DataGridCell cell, object dataItem)
         {
@@ -33,6 +33,19 @@ namespace DeclarableDataGrid
             // After that, the cell resolves its value via GetColumnValue method of the DeclarableColumnDataDescriptor
             cell.SetBinding(FrameworkElement.DataContextProperty, ColumnDataBinding);
             return base.GenerateElement(cell, dataItem);
+        }
+
+        public void UseTemplateContainer(ColumnTemplateContainer templateContainer)
+        {
+            CellStyle = templateContainer.CellStyle;
+            HeaderStyle = templateContainer.HeaderStyle;
+
+            CellTemplate = templateContainer.CellTemplate;
+            HeaderTemplate = templateContainer.HeaderTemplate;
+            if (HeaderTemplate != null)
+            {
+                Header = null;
+            }
         }
     }
 }

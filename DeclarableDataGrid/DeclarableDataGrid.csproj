@@ -53,10 +53,11 @@
     <Compile Include="PropertyDescriptors\DeclarableColumnDataDescriptor.cs" />
     <Compile Include="PropertyDescriptors\DeclarableDataGridPropertyDescriptor.cs" />
     <Compile Include="DeclarableDataGridColumn.cs" />
-    <Compile Include="DeclarableColumnGenerationHelper.cs" />
+    <Compile Include="DeclarableDataGridHelper.cs" />
     <Compile Include="DeclarableDataGridObservableCollection.cs" />
     <Compile Include="DeclarableDataGridTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ColumnTemplateContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

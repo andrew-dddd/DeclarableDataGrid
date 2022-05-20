@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static DeclarableDataGrid.DeclarableDataGridTemplateSelector;
 
 namespace DeclarableDataGrid.Example
 {
@@ -35,7 +36,13 @@ namespace DeclarableDataGrid.Example
 
         private void ExampleDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            DeclarableColumnGenerationHelper.OnDeclarableColumnGenerated(e);
+            DeclarableDataGridHelper.CreateDeclarableDataGrid(e, column =>
+            {
+                //if (column.ColumnName == "DynamicColumn1")
+                //{
+                //    column.UseTemplateContainer(this.Resources["ColumnTemplate"] as ColumnTemplateContainer);
+                //}
+            });
         }
     }
 }
