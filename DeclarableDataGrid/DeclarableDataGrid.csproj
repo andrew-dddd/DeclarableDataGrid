@@ -47,13 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnBuilders\DynamicColumnBuilder.cs" />
+    <Compile Include="ColumnTemplateConfiguration.cs" />
     <Compile Include="PropertyDescriptors\DynamicColumnPropertyDescriptor.cs" />
     <Compile Include="PropertyDescriptors\PropertyColumnDataDescriptor.cs" />
     <Compile Include="ColumnBuilders\PropertyColumnBuilder.cs" />
     <Compile Include="PropertyDescriptors\DeclarableColumnDataDescriptor.cs" />
     <Compile Include="PropertyDescriptors\DeclarableDataGridPropertyDescriptor.cs" />
     <Compile Include="DeclarableDataGridColumn.cs" />
-    <Compile Include="DeclarableDataGridHelper.cs" />
+    <Compile Include="DeclarableDataGridBuilder.cs" />
     <Compile Include="DeclarableDataGridObservableCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColumnTemplateContainer.cs" />

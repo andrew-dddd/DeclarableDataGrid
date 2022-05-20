@@ -1,17 +1,30 @@
 ﻿using DeclarableDataGrid.PropertyDescriptors;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DeclarableDataGrid
 {
-    public static class DeclarableDataGridHelper
+    public class DeclarableDataGridBuilder
     {
+        private ColumnTemplateConfiguration _columnTemplateConfiguration;
+
+        public DeclarableDataGridBuilder()
+        {
+        }
+
+        public ColumnTemplateConfiguration ConfigureColumnTemplates(ResourceDictionary resourceDictionary)
+        {
+            _columnTemplateConfiguration = new ColumnTemplateConfiguration(resourceDictionary);
+            return _columnTemplateConfiguration;
+        }
+
         /// <summary>
         /// Default logic for 
         /// </summary>
         /// <param name="e"></param>
         /// <param name="columnConfigurationAction"></param>
-        public static void CreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
+        public void CreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
         {
             // By default, DataGrid creates text column for complex types to display ToString() value of the object.
             // Fot other simple types, there are other templates, like checkbox for the bool
@@ -39,6 +52,11 @@ namespace DeclarableDataGrid
             else
             {
                 dgdtc.Header = e.Column.Header;
+            }
+
+            if (_columnTemplateConfiguration != null && _columnTemplateConfiguration.TryGetTemplateContainerByColumnName(dgdtc.ColumnName, out var columnTemplateContainer))
+            {
+                dgdtc.UseTemplateContainer(columnTemplateContainer);
             }
 
             columnConfigurationAction?.Invoke(dgdtc);
