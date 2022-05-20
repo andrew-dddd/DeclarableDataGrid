@@ -1,35 +1,22 @@
 ﻿using DeclarableDataGrid.PropertyDescriptors;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DeclarableDataGrid
 {
-    public static class DeclarableColumnGenerationHelper
+    public class DeclarableDataGridBuilder
     {
-        /// <summary>
-        /// Creates declarable data grid columns using TemplateSelector 
-        /// </summary>
-        /// <param name="templateSelector">Column template selector</param>
-        /// <param name="e">Column creation event arg</param>
-        public static void OnDeclarableColumnGenerated(DataTemplateSelector templateSelector, DataGridAutoGeneratingColumnEventArgs e)
+        private ColumnTemplateConfiguration _columnTemplateConfiguration;
+
+        public DeclarableDataGridBuilder()
         {
-            OnDeclarableColumnGenerated(e, dgdtc =>
-            {
-                dgdtc.CellTemplateSelector = templateSelector;
-            });
         }
 
-        /// <summary>
-        /// Default logic using DeclarableDataGridTemplateSelector selector.
-        /// </summary>
-        /// <param name="templateSelector"></param>
-        /// <param name="e"></param>
-        public static void OnDeclarableColumnGenerated(DeclarableDataGridTemplateSelector templateSelector, DataGridAutoGeneratingColumnEventArgs e)
+        public ColumnTemplateConfiguration ConfigureColumnTemplates(ResourceDictionary resourceDictionary)
         {
-            OnDeclarableColumnGenerated(e, dgdtc =>
-            {
-                dgdtc.CellTemplateSelector = templateSelector;
-            });
+            _columnTemplateConfiguration = new ColumnTemplateConfiguration(resourceDictionary);
+            return _columnTemplateConfiguration;
         }
 
         /// <summary>
@@ -37,7 +24,7 @@ namespace DeclarableDataGrid
         /// </summary>
         /// <param name="e"></param>
         /// <param name="columnConfigurationAction"></param>
-        public static void OnDeclarableColumnGenerated(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
+        public void CreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
         {
             // By default, DataGrid creates text column for complex types to display ToString() value of the object.
             // Fot other simple types, there are other templates, like checkbox for the bool
@@ -52,7 +39,8 @@ namespace DeclarableDataGrid
             }
 
             // Storing type of the column for the later use in the cell template selector.
-            dgdtc.ColumnDataType = e.PropertyType;            
+            dgdtc.ColumnDataType = e.PropertyType;
+            dgdtc.CellTemplateSelector = new DataTemplateSelector();
 
             if (e.PropertyDescriptor is DeclarableDataGridPropertyDescriptor descriptor)
             {
@@ -66,11 +54,22 @@ namespace DeclarableDataGrid
                 dgdtc.Header = e.Column.Header;
             }
 
+            if (_columnTemplateConfiguration != null && _columnTemplateConfiguration.TryGetTemplateContainerByColumnName(dgdtc.ColumnName, out var columnTemplateContainer))
+            {
+                dgdtc.UseTemplateContainer(columnTemplateContainer);
+            }
+
             columnConfigurationAction?.Invoke(dgdtc);
 
             // Replacing automatically created column with the column created here
             // No cancelling needed - DataGrid will just swallow whatever is in the event arg.
             e.Column = dgdtc;
+        }
+
+        public static void DefaultCreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
+        {
+            DeclarableDataGridBuilder builder = new DeclarableDataGridBuilder();
+            builder.CreateDeclarableDataGrid(e, columnConfigurationAction);
         }
     }
 }

@@ -50,6 +50,8 @@ namespace DeclarableDataGrid.PropertyDescriptors
             {
                 if (_dynamicPropertiesValues.TryGetValue(propertyDescriptor.Name, out var value) && propertyDescriptor.PropertyType.IsAssignableFrom(value.GetType())) continue;
 
+                if (value == null) continue;
+
                 // If the type of set value does not match the configured type, or the type of value does not inherit from the configured type, throw exception.                
                 throw new InvalidOperationException($"Expected property {propertyDescriptor.Name} to be of type {propertyDescriptor.PropertyType} but instead property is of type {value.GetType()}");
             }
@@ -80,7 +82,10 @@ namespace DeclarableDataGrid.PropertyDescriptors
 
         public object this[string name]
         {
-            get { return GetDynamicPropertyValue(name); }
+            get
+            {
+                return GetDynamicPropertyValue(name);
+            }
             set
             {
                 SetDynamicPropertyValue(name, value);

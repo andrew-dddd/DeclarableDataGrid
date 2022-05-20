@@ -18,11 +18,29 @@ DeclarableDataGrid will help you contol Windows Presentation Foundation DataGrid
 ```
 <DataGrid Name="ExampleDataGrid" ItemsSource="{Binding ExampleCollection}" AutoGenerateColumns="True" AutoGeneratingColumn="ExampleDataGrid_AutoGeneratingColumn"></DataGrid>
 ```
+
+- In the event handler use default create function
+
+```
+private void ExampleDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+{
+    DeclarableDataGridBuilder.DefaultCreateDeclarableDataGrid(e);
+}
+
+```
+
+- Or create `DeclarableDataGridBuilder` in the window constructor
+```
+_declarableDataGridBuilder = new DeclarableDataGridBuilder();
+_declarableDataGridBuilder.ConfigureColumnTemplates(Resources)
+    .ForColumnUseTemplate("DynamicColumn1", "ColumnTemplate")
+    .ForColumnUseTemplate("PersonData", "PersonDataColumnTemplate");
+```
 - In the event handler of the `AutoGeneratingColumn` event include the helper function from the DeclarableDataGrid
 ```
     private void ExampleDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
     {
-        DeclarableColumnGenerationHelper.OnDeclarableColumnGenerated(e);
+        _declarableDataGridBuilder.OnDeclarableColumnGenerated(e);
     }
 ```
 
