@@ -65,5 +65,11 @@ namespace DeclarableDataGrid
             // No cancelling needed - DataGrid will just swallow whatever is in the event arg.
             e.Column = dgdtc;
         }
+
+        public static void DefaultCreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction)
+        {
+            DeclarableDataGridBuilder builder = new DeclarableDataGridBuilder();
+            builder.CreateDeclarableDataGrid(e, columnConfigurationAction);
+        }
     }
 }
