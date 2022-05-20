@@ -17,7 +17,7 @@ namespace DeclarableDataGrid.Example
             ExampleCollection = new DeclarableDataGridObservableCollection<PersonDataGridItem>();
 
             ExampleCollection.UsePropertyAsColumn(x => x.PersonId, x => x.WithDisplayName("Id"));
-            //ExampleCollection.UsePropertyAsColumn(x => x.PersonData, x => x.WithDisplayName("Person data"));
+            ExampleCollection.UsePropertyAsColumn(x => x.PersonData, x => x.WithDisplayName("Person data"));
             ExampleCollection.UsePropertyAsColumn(x => x.Name, x => x.WithDisplayName("Name"));
             ExampleCollection.UsePropertyAsColumn(x => x.LastName, x => x.WithDisplayName("Last Name"));
             ExampleCollection.UsePropertyAsColumn(x => x.BirthDate, x => x.WithDisplayName("Birth Date"));

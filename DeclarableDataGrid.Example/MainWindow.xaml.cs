@@ -35,6 +35,9 @@ namespace DeclarableDataGrid.Example
         private void ExampleDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             _declarableDataGridBuilder.CreateDeclarableDataGrid(e);
+
+            // OR
+            // DeclarableDataGridBuilder.DefaultCreateDeclarableDataGrid(e);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace DeclarableDataGrid
             e.Column = dgdtc;
         }
 
-        public static void DefaultCreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction)
+        public static void DefaultCreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
         {
             DeclarableDataGridBuilder builder = new DeclarableDataGridBuilder();
             builder.CreateDeclarableDataGrid(e, columnConfigurationAction);
