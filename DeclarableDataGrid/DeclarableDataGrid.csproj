@@ -55,7 +55,6 @@
     <Compile Include="DeclarableDataGridColumn.cs" />
     <Compile Include="DeclarableDataGridHelper.cs" />
     <Compile Include="DeclarableDataGridObservableCollection.cs" />
-    <Compile Include="DeclarableDataGridTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColumnTemplateContainer.cs" />
   </ItemGroup>
