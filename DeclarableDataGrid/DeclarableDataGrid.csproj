@@ -48,6 +48,9 @@
   <ItemGroup>
     <Compile Include="ColumnBuilders\DynamicColumnBuilder.cs" />
     <Compile Include="ColumnTemplateConfiguration.cs" />
+    <Compile Include="ColumnTemplateConfigurationExtensions.cs" />
+    <Compile Include="CustomColumnFilter.cs" />
+    <Compile Include="IColumnFilter.cs" />
     <Compile Include="PropertyDescriptors\DynamicColumnPropertyDescriptor.cs" />
     <Compile Include="PropertyDescriptors\PropertyColumnDataDescriptor.cs" />
     <Compile Include="ColumnBuilders\PropertyColumnBuilder.cs" />

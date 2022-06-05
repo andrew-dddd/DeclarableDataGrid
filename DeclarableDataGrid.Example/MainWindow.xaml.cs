@@ -19,22 +19,21 @@ namespace DeclarableDataGrid.Example
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly DeclarableDataGridBuilder _declarableDataGridBuilder;
-
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-
-            _declarableDataGridBuilder = new DeclarableDataGridBuilder();
-            _declarableDataGridBuilder.ConfigureColumnTemplates(Resources)
-                .ForColumnUseTemplate("DynamicColumn1", "ColumnTemplate")
-                .ForColumnUseTemplate("PersonData", "PersonDataColumnTemplate");
+            
+            ViewModel.ExampleCollection.ConfigureColumnTemplates(Resources)                
+                .ForColumnNameUseResource("DynamicColumn1", "ColumnTemplate")
+                .ForColumnNameUseResource("PersonData", "PersonDataColumnTemplate");
         }
+
+        private MainWindowViewModel ViewModel => DataContext as MainWindowViewModel;
 
         private void ExampleDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            _declarableDataGridBuilder.CreateDeclarableDataGrid(e);
+            ViewModel.ExampleCollection.CreateDeclarableDataGrid(e);
 
             // OR
             // DeclarableDataGridBuilder.DefaultCreateDeclarableDataGrid(e);

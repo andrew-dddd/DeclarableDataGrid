@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace DeclarableDataGrid
 {
@@ -13,6 +15,7 @@ namespace DeclarableDataGrid
     {
         private PropertyDescriptorCollection _propertyDescriptorCollection = new PropertyDescriptorCollection(new PropertyDescriptor[0]);
         private HashSet<string> _columnHeaderNames = new HashSet<string>();
+        private DeclarableDataGridBuilder _declarableDataGridBuilder = new DeclarableDataGridBuilder();
 
         public void UsePropertyAsColumn<TProperty>(Expression<Func<T, TProperty>> expression, Action<PropertyColumnBuilder> builder = null)
         {
@@ -23,6 +26,11 @@ namespace DeclarableDataGrid
             AddColumnDescriptor(columnHeaderBuilder.BuildColumnDescriptor());
         }
 
+        public ColumnTemplateConfiguration ConfigureColumnTemplates(ResourceDictionary resources)
+        {
+            return _declarableDataGridBuilder.ConfigureColumnTemplates(resources);
+        }
+
         public void UseDynamicColumn<TColumn>(string columnName, Action<DynamicColumnBuilder> builder = null)
         {
             var columnHeaderBuilder = new DynamicColumnBuilder(typeof(T), typeof(TColumn), columnName)
@@ -30,6 +38,11 @@ namespace DeclarableDataGrid
 
             builder?.Invoke(columnHeaderBuilder);
             AddColumnDescriptor(columnHeaderBuilder.BuildColumnDescriptor());
+        }
+
+        public void CreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public string GetListName(PropertyDescriptor[] listAccessors) => string.Empty;

@@ -54,7 +54,7 @@ namespace DeclarableDataGrid
                 dgdtc.Header = e.Column.Header;
             }
 
-            if (_columnTemplateConfiguration != null && _columnTemplateConfiguration.TryGetTemplateContainerByColumnName(dgdtc.ColumnName, out var columnTemplateContainer))
+            if (_columnTemplateConfiguration != null && _columnTemplateConfiguration.TryGetTemplateContainerByColumnName(dgdtc, out var columnTemplateContainer))
             {
                 dgdtc.UseTemplateContainer(columnTemplateContainer);
             }

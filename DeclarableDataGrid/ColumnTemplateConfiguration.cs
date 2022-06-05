@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace DeclarableDataGrid
@@ -7,7 +8,7 @@ namespace DeclarableDataGrid
     public class ColumnTemplateConfiguration
     {
         private readonly ResourceDictionary _resourceDictionary;
-        private readonly Dictionary<string, string> _columnResourceMapping = new Dictionary<string, string>();
+        private readonly List<KeyValuePair<IColumnFilter, string>> _columnResourceMapping = new List<KeyValuePair<IColumnFilter, string>>();
 
         internal ColumnTemplateConfiguration(ResourceDictionary resourceDictionary)
         {
@@ -17,9 +18,9 @@ namespace DeclarableDataGrid
         /// <summary>
         /// Creates binding between resource key and column name.
         /// </summary>
-        /// <param name="columnName">Name of the column</param>
+        /// <param name="columnFilter">Column filter</param>
         /// <param name="resourceKey">Resource key to use for the column. Resource must be of type <see cref="ColumnTemplateContainer"/></param>
-        public ColumnTemplateConfiguration ForColumnUseTemplate(string columnName, string resourceKey)
+        public ColumnTemplateConfiguration ForColumnUseResource(IColumnFilter columnFilter, string resourceKey)
         {
             if (!_resourceDictionary.Contains(resourceKey) && _resourceDictionary[resourceKey] is ColumnTemplateContainer)
             {
@@ -28,7 +29,7 @@ namespace DeclarableDataGrid
 
             if (_resourceDictionary[resourceKey] is ColumnTemplateContainer)
             {
-                _columnResourceMapping.Add(columnName, resourceKey);
+                _columnResourceMapping.Add(new KeyValuePair<IColumnFilter, string>(columnFilter, resourceKey));
             }
             else
             {
@@ -38,10 +39,12 @@ namespace DeclarableDataGrid
             return this;
         }
 
-        internal bool TryGetTemplateContainerByColumnName(string columnName, out ColumnTemplateContainer columnTemplateContainer)
+        internal bool TryGetTemplateContainerByColumnName(DeclarableDataGridColumn declarableDataGridColumn, out ColumnTemplateContainer columnTemplateContainer)
         {
             columnTemplateContainer = null;
-            if (_columnResourceMapping.TryGetValue(columnName, out var resourceKey))
+            var resourceKey = _columnResourceMapping.FirstOrDefault(x => x.Key.MatchColumn(declarableDataGridColumn)).Value;
+
+            if (resourceKey != null && _resourceDictionary.Contains(resourceKey))
             {
                 columnTemplateContainer = _resourceDictionary[resourceKey] as ColumnTemplateContainer;
                 return true;
