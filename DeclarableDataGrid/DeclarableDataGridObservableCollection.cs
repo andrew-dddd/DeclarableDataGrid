@@ -40,9 +40,9 @@ namespace DeclarableDataGrid
             AddColumnDescriptor(columnHeaderBuilder.BuildColumnDescriptor());
         }
 
-        public void CreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e)
+        public void CreateDeclarableDataGrid(DataGridAutoGeneratingColumnEventArgs e, Action<DeclarableDataGridColumn> columnConfigurationAction = null)
         {
-            throw new NotImplementedException();
+            _declarableDataGridBuilder.CreateDeclarableDataGrid(e, columnConfigurationAction);
         }
 
         public string GetListName(PropertyDescriptor[] listAccessors) => string.Empty;
