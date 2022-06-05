@@ -31,7 +31,7 @@ namespace DeclarableDataGrid
             return _declarableDataGridBuilder.ConfigureColumnTemplates(resources);
         }
 
-        public void UseDynamicColumn<TColumn>(string columnName, Action<DynamicColumnBuilder> builder = null)
+        public void UseDynamicPropertyAsColumn<TColumn>(string columnName, Action<DynamicColumnBuilder> builder = null)
         {
             var columnHeaderBuilder = new DynamicColumnBuilder(typeof(T), typeof(TColumn), columnName)
                 .WithDisplayIndex(_propertyDescriptorCollection.Count);

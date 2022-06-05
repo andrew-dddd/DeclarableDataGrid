@@ -23,9 +23,9 @@ namespace DeclarableDataGrid.Example
             ExampleCollection.UsePropertyAsColumn(x => x.BirthDate, x => x.WithDisplayName("Birth Date"));
             
 
-            ExampleCollection.UseDynamicColumn<int>("DynamicColumn1", x => x.WithDisplayName("Dynamic column 1"));
-            ExampleCollection.UseDynamicColumn<double>("DynamicColumn2", x => x.WithDisplayName("Dynamic column 2"));
-            ExampleCollection.UseDynamicColumn<string>("DynamicColumn3", x => x.WithDisplayName("Dynamic column 3"));
+            ExampleCollection.UseDynamicPropertyAsColumn<int>("DynamicColumn1", x => x.WithDisplayName("Dynamic column 1"));
+            ExampleCollection.UseDynamicPropertyAsColumn<double>("DynamicColumn2", x => x.WithDisplayName("Dynamic column 2"));
+            ExampleCollection.UseDynamicPropertyAsColumn<string>("DynamicColumn3", x => x.WithDisplayName("Dynamic column 3"));
 
             ExampleCollection.Add(new PersonDataGridItem
             {

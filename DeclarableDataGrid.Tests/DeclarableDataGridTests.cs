@@ -13,7 +13,7 @@ namespace DeclarableDataGrid.Tests
         public void DynamicColumnBuilder_ShouldBuildDynamicColumnDescriptor()
         {
             // Arrange
-            TestCollection.UseDynamicColumn<string>("TestDynamicColumn", x => x.WithDisplayIndex(10).WithDisplayName("Test dynamic column"));
+            TestCollection.UseDynamicPropertyAsColumn<string>("TestDynamicColumn", x => x.WithDisplayIndex(10).WithDisplayName("Test dynamic column"));
 
             // Assert
             var itemProperties = TestCollection.GetItemProperties(null);
@@ -68,7 +68,7 @@ namespace DeclarableDataGrid.Tests
         {
             // Arrange
             TestCollection.UsePropertyAsColumn(x => x.TestProperty, x => x.WithDisplayIndex(0));
-            TestCollection.UseDynamicColumn<TestBaseClass>("TestComplexProperty", x => x.WithDisplayIndex(1));
+            TestCollection.UseDynamicPropertyAsColumn<TestBaseClass>("TestComplexProperty", x => x.WithDisplayIndex(1));
 
             // Assert
             TestCollection.Add(new TestClass
@@ -82,7 +82,7 @@ namespace DeclarableDataGrid.Tests
         {
             // Arrange
             TestCollection.UsePropertyAsColumn(x => x.TestProperty, x => x.WithDisplayIndex(0));
-            TestCollection.UseDynamicColumn<TestBaseClass>("TestComplexProperty", x => x.WithDisplayIndex(1));
+            TestCollection.UseDynamicPropertyAsColumn<TestBaseClass>("TestComplexProperty", x => x.WithDisplayIndex(1));
 
             // Assert
             var ex = Assert.Throws<InvalidOperationException>(() => TestCollection.Add(new TestClass
